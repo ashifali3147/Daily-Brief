@@ -13,6 +13,6 @@ interface NewsDao {
     suspend fun insertNews(news: List<News>)
 
     @Query("SELECT * FROM news")
-    suspend fun getAllNews(): Flow<List<News>>
+    fun getAllNews(): Flow<List<News>>
 
 }
