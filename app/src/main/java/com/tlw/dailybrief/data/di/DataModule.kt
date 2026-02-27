@@ -1,10 +1,14 @@
 package com.tlw.dailybrief.data.di
 
+import android.content.Context
 import com.tlw.dailybrief.BuildConfig
+import com.tlw.dailybrief.data.local.NewsDao
+import com.tlw.dailybrief.data.local.NewsDatabase
 import com.tlw.dailybrief.data.remote.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -26,5 +30,16 @@ object DataModule {
     @Provides
     fun provideApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideNewsDataBase(@ApplicationContext context: Context): NewsDatabase {
+        return NewsDatabase.getInstance(context)
+    }
+
+    @Provides
+    fun provideNewsDao(newsDatabase: NewsDatabase): NewsDao {
+        return newsDatabase.getNewsDao()
     }
 }
