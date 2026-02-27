@@ -1,7 +1,4 @@
 package com.tlw.dailybrief.domain.model
-
-import java.sql.Time
-
 data class News(
     val ai_org: String,
     val ai_region: String,
