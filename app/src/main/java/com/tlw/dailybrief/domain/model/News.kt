@@ -3,7 +3,7 @@ package com.tlw.dailybrief.domain.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "news")
 data class News(
     @PrimaryKey
     val article_id: String,
@@ -33,7 +33,7 @@ data class News(
     val source_priority: Int,
     val source_url: String,
     val title: String,
-    val video_url: Any,
+    val video_url: String?,
     val workType: String = "",
     val time: Long = System.currentTimeMillis()
 )
