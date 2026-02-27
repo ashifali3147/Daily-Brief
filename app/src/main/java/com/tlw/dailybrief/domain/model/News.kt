@@ -1,10 +1,16 @@
 package com.tlw.dailybrief.domain.model
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class News(
+    @PrimaryKey
+    val article_id: String,
     val ai_org: String,
     val ai_region: String,
     val ai_summary: String,
     val ai_tag: String,
-    val article_id: String,
     val category: List<String>,
     val content: String,
     val country: List<String>,
