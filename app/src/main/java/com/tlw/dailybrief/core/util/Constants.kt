@@ -8,5 +8,6 @@ object Constants {
     const val NEWS_API_KEY = BuildConfig.NEWS_API_KEY
 
     //WORK-TYPE
-    const val ONE_TYPE_WORK_REQUEST = "ONE_TYPE_WORK_REQUEST"
+    const val ONE_TIME_WORK_REQUEST = "ONE_TIME_WORK_REQUEST"
+    const val PERIODIC_WORK_REQUEST = "PERIODIC_WORK_REQUEST"
 }
