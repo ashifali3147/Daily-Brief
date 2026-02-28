@@ -22,7 +22,7 @@ class FetchWorker @AssistedInject constructor(
         try {
             val response = apiService.getLatestNews(Constants.NEWS_API_KEY, "in", "en")
             val newsList = response.results.map {
-                it.toDomain(workType = Constants.ONE_TYPE_WORK_REQUEST)
+                it.toDomain(workType = Constants.ONE_TIME_WORK_REQUEST)
             }
             newsDao.insertNews(newsList)
             return Result.success()
