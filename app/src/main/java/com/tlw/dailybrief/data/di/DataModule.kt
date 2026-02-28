@@ -2,6 +2,7 @@ package com.tlw.dailybrief.data.di
 
 import android.content.Context
 import com.tlw.dailybrief.BuildConfig
+import com.tlw.dailybrief.core.util.Constants
 import com.tlw.dailybrief.data.local.NewsDao
 import com.tlw.dailybrief.data.local.NewsDatabase
 import com.tlw.dailybrief.data.remote.ApiService
@@ -22,7 +23,7 @@ object DataModule {
     @Provides
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BuildConfig.NEWS_API_BASE_URL)
+            .baseUrl(Constants.NEWS_API_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
