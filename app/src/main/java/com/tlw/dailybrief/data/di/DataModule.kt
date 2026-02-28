@@ -1,11 +1,13 @@
 package com.tlw.dailybrief.data.di
 
 import android.content.Context
+import androidx.work.WorkManager
 import com.tlw.dailybrief.BuildConfig
 import com.tlw.dailybrief.core.util.Constants
 import com.tlw.dailybrief.data.local.NewsDao
 import com.tlw.dailybrief.data.local.NewsDatabase
 import com.tlw.dailybrief.data.remote.ApiService
+import com.tlw.dailybrief.data.repository.NewsRepoImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,5 +44,16 @@ object DataModule {
     @Provides
     fun provideNewsDao(newsDatabase: NewsDatabase): NewsDao {
         return newsDatabase.getNewsDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideWorkManager(@ApplicationContext context: Context): WorkManager {
+        return WorkManager.getInstance(context)
+    }
+
+    @Provides
+    fun getNewsRepo(workManager: WorkManager, newsDao: NewsDao): NewsRepoImpl {
+        return NewsRepoImpl(workManager, newsDao)
     }
 }
