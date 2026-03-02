@@ -3,6 +3,7 @@ package com.tlw.dailybrief.presentation.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.tlw.dailybrief.databinding.NewsTileBinding
 import com.tlw.dailybrief.domain.model.News
 
@@ -21,8 +22,10 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
         position: Int
     ) {
         holder.binding.apply {
-            tvTitle.text = newsList[position].title
-            tvDescription.text = newsList[position].description
+            val news = newsList[position]
+            tvTitle.text = news.title
+            tvDescription.text = news.description
+            Glide.with(imgThumbnail).load(news.image_url).into(imgThumbnail)
         }
     }
 
