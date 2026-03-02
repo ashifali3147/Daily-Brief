@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface NewsRepo {
 
-    fun getNewsDetail()
+    fun getLatestNews()
 
     fun getAllNews(): Flow<List<News>>
 

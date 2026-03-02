@@ -1,19 +1,47 @@
 package com.tlw.dailybrief.data.repository
 
+import androidx.work.Constraints
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
+import com.tlw.dailybrief.core.util.Constants
+import com.tlw.dailybrief.data.local.NewsDao
+import com.tlw.dailybrief.data.worker.FetchWorker
+import com.tlw.dailybrief.data.worker.PeriodicWorker
 import com.tlw.dailybrief.domain.model.News
 import com.tlw.dailybrief.domain.repository.NewsRepo
 import kotlinx.coroutines.flow.Flow
+import java.util.concurrent.TimeUnit
 
-class NewsRepoImpl: NewsRepo {
-    override fun getNewsDetail() {
-        TODO("Not yet implemented")
+class NewsRepoImpl(
+    private val workManager: WorkManager,
+    private val newsDao: NewsDao
+) : NewsRepo {
+
+    override fun getLatestNews() {
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+        val workRequest = OneTimeWorkRequestBuilder<FetchWorker>()
+            .setConstraints(constraints)
+            .build()
+        workManager.enqueue(workRequest)
     }
 
-    override fun getAllNews(): Flow<List<News>> {
-        TODO("Not yet implemented")
-    }
+    override fun getAllNews(): Flow<List<News>> = newsDao.getAllNews()
 
     override fun setPeriodicWorkRequest() {
-        TODO("Not yet implemented")
+        Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+        val workRequest =
+            PeriodicWorkRequest.Builder(PeriodicWorker::class.java, 15, TimeUnit.MINUTES)
+                .build()
+        workManager.enqueueUniquePeriodicWork(
+            Constants.PERIODIC_WORK_REQUEST_NAME,
+            ExistingPeriodicWorkPolicy.UPDATE, workRequest
+        )
     }
 }
