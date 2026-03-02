@@ -79,6 +79,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+
     implementation(libs.work.manager)
     implementation(libs.work.manager.dagger)
     kapt(libs.work.manager.dagger.kapt)
