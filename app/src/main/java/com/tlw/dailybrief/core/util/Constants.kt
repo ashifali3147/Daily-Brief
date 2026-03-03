@@ -12,4 +12,12 @@ object Constants {
     const val PERIODIC_WORK_REQUEST = "PERIODIC_WORK_REQUEST"
 
     const val PERIODIC_WORK_REQUEST_NAME = "fetch-latest-news"
+
+    //NOTIFICATION
+    const val NOTIFICATION_CHANNEL_ID = "news_channel"
+    const val NOTIFICATION_CHANNEL_NAME = "DAILY BRIEF"
+
+    //NEWS JSON KEY
+    const val NEWS_JSON_KEY = "news_json_tlw"
+
 }
