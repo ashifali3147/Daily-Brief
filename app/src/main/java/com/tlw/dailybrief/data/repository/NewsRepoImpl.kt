@@ -38,11 +38,12 @@ class NewsRepoImpl(
     override fun getAllNews(): Flow<List<News>> = newsDao.getAllNews()
 
     override fun setPeriodicWorkRequest() {
-        Constraints.Builder()
+        val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
         val workRequest =
             PeriodicWorkRequest.Builder(PeriodicWorker::class.java, 15, TimeUnit.MINUTES)
+                .setConstraints(constraints)
                 .build()
         workManager.enqueueUniquePeriodicWork(
             Constants.PERIODIC_WORK_REQUEST_NAME,
