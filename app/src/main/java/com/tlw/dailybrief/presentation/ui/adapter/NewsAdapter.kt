@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.tlw.dailybrief.core.util.Utils
 import com.tlw.dailybrief.databinding.NewsTileBinding
 import com.tlw.dailybrief.domain.model.News
 
@@ -25,7 +26,9 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
             val news = newsList[position]
             tvTitle.text = news.title
             tvDescription.text = news.description
+            tvTime.text = "${Utils.formatTimestampToDMY(news.time)} | ${Utils.formatTimestampToTime(news.time)}"
             Glide.with(imgThumbnail).load(news.image_url).into(imgThumbnail)
+
         }
     }
 
