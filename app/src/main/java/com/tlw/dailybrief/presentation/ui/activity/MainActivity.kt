@@ -7,13 +7,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tlw.dailybrief.R
 import com.tlw.dailybrief.databinding.ActivityMainBinding
 import com.tlw.dailybrief.presentation.ui.adapter.NewsAdapter
 import com.tlw.dailybrief.presentation.viewmodel.NewsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     val viewModel by viewModels<NewsViewModel>()
@@ -43,7 +46,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupRecyclerview() {
         binding.rvNews.apply {
-            adapter = NewsAdapter()
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = newsAdapter
             setHasFixedSize(true)
         }
     }
