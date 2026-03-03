@@ -9,6 +9,7 @@ import androidx.work.WorkManager
 import com.tlw.dailybrief.core.util.Constants
 import com.tlw.dailybrief.data.local.NewsDao
 import com.tlw.dailybrief.data.worker.FetchWorker
+import com.tlw.dailybrief.data.worker.NotificationWorker
 import com.tlw.dailybrief.data.worker.PeriodicWorker
 import com.tlw.dailybrief.domain.model.News
 import com.tlw.dailybrief.domain.repository.NewsRepo
@@ -27,7 +28,11 @@ class NewsRepoImpl(
         val workRequest = OneTimeWorkRequestBuilder<FetchWorker>()
             .setConstraints(constraints)
             .build()
-        workManager.enqueue(workRequest)
+        val notificationWorkRequest = OneTimeWorkRequestBuilder<NotificationWorker>()
+            .build()
+        workManager.beginWith(workRequest)
+            .then(notificationWorkRequest)
+            .enqueue()
     }
 
     override fun getAllNews(): Flow<List<News>> = newsDao.getAllNews()

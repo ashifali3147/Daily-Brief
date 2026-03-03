@@ -3,7 +3,9 @@ package com.tlw.dailybrief.data.worker
 import android.content.Context
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
+import androidx.work.Data
 import androidx.work.WorkerParameters
+import com.google.gson.Gson
 import com.tlw.dailybrief.core.util.Constants
 import com.tlw.dailybrief.data.local.NewsDao
 import com.tlw.dailybrief.data.mapper.toDomain
@@ -25,7 +27,11 @@ class FetchWorker @AssistedInject constructor(
                 it.toDomain(workType = Constants.ONE_TIME_WORK_REQUEST)
             }
             newsDao.insertNews(newsList)
-            return Result.success()
+            val randomNews = newsList.randomOrNull()
+            val data = Data.Builder()
+                .putString(Constants.NEWS_JSON_KEY, Gson().toJson(randomNews))
+                .build()
+            return Result.success(data)
         } catch (e: Exception) {
             return Result.failure()
         }
