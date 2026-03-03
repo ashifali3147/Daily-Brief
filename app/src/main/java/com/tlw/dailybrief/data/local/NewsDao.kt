@@ -12,7 +12,7 @@ interface NewsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNews(news: List<News>)
 
-    @Query("SELECT * FROM news")
+    @Query("SELECT * FROM news ORDER BY time DESC")
     fun getAllNews(): Flow<List<News>>
 
 }
