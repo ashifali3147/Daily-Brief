@@ -1,0 +1,23 @@
+package com.tlw.dailybrief.core.util
+
+import com.tlw.dailybrief.BuildConfig
+
+object Constants {
+    const val NEWS_DB_NAME = "news_db"
+    const val NEWS_API_BASE_URL = BuildConfig.NEWS_API_BASE_URL
+    const val NEWS_API_KEY = BuildConfig.NEWS_API_KEY
+
+    //WORK-TYPE
+    const val ONE_TIME_WORK_REQUEST = "ONE_TIME_WORK_REQUEST"
+    const val PERIODIC_WORK_REQUEST = "PERIODIC_WORK_REQUEST"
+
+    const val PERIODIC_WORK_REQUEST_NAME = "fetch-latest-news"
+
+    //NOTIFICATION
+    const val NOTIFICATION_CHANNEL_ID = "news_channel"
+    const val NOTIFICATION_CHANNEL_NAME = "DAILY BRIEF"
+
+    //NEWS JSON KEY
+    const val NEWS_JSON_KEY = "news_json_tlw"
+
+}
